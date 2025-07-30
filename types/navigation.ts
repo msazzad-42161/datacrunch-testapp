@@ -2,7 +2,7 @@ import { Book } from './book';
 
 export type RootStackParamList = {
   Main: undefined;
-  BookDetails: { book: Book };
+  BookDetails: { key: string, first_publish_year:number };
 };
 
 export type TabParamList = {
@@ -14,6 +14,7 @@ export type TabParamList = {
 
 export type HomeStackParamList = {
   HomeScreen: undefined;
+  BookListScreen: { title: string; books: Book[] };
 };
 
 export type SearchStackParamList = {

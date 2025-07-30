@@ -2,7 +2,7 @@ export interface Book {
     key: string;
     title: string;
     author_name?: string[];
-    first_publish_year?: number;
+    first_publish_year: number;
     cover_i?: number;
     isbn?: string[];
     subject?: string[];
@@ -16,6 +16,10 @@ export interface Book {
     subjects?: string[];
     subject_places?: string[];
     covers?: number[];
+    authors?: Array<{
+      author: { key: string };
+      type: { key: string };
+    }>;
     links?: Array<{
       title: string;
       url: string;

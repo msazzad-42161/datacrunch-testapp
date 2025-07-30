@@ -20,7 +20,7 @@ export const AppNavigator: React.FC = () => {
           name="BookDetails" 
           component={BookDetailsScreen}
           options={{
-            headerShown: true,
+            headerShown: false,
             headerTitle: 'Book Details',
           }}
         />

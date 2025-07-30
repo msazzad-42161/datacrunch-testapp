@@ -2,6 +2,8 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen } from '../screens/Home/HomeScreen';
 import { HomeStackParamList } from '../types/navigation';
+import { BookListScreen } from '../screens/Home/BookListScreen';
+import { COLORS } from '../utils/theme';
 
 const Stack = createStackNavigator<HomeStackParamList>();
 
@@ -12,13 +14,14 @@ export const HomeStackNavigator: React.FC = () => {
         headerShown: true,
         headerShadowVisible:false,
         headerStyle: {
-          backgroundColor: '#fff',
+          backgroundColor: COLORS.accent2,
         },
         headerTitleStyle: {
           fontWeight: 'bold',
           fontSize: 18,
+          color:COLORS.light1
         },
-        headerTintColor: '#000',
+        headerTintColor: COLORS.light1,
       }}
     >
       <Stack.Screen 
@@ -26,6 +29,13 @@ export const HomeStackNavigator: React.FC = () => {
         component={HomeScreen}
         options={{
           title: 'DataCrunch - BookApp',
+          headerTitleAlign: 'center',
+        }}
+      />
+      <Stack.Screen 
+        name="BookListScreen"
+        component={BookListScreen}
+        options={{
           headerTitleAlign: 'center',
         }}
       />

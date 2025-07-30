@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { FavoritesScreen } from '../screens/Favorites/FavoritesScreen';
 import { FavoritesStackParamList } from '../types/navigation';
+import { COLORS } from '../utils/theme';
 
 const Stack = createStackNavigator<FavoritesStackParamList>();
 
@@ -12,11 +13,12 @@ export const FavoritesStackNavigator: React.FC = () => {
         headerShown: true,
         headerShadowVisible:false,
         headerStyle: {
-          backgroundColor: '#fff',
+          backgroundColor: COLORS.accent2,
         },
         headerTitleStyle: {
           fontWeight: 'bold',
           fontSize: 18,
+          color:COLORS.light1
         },
         headerTintColor: '#000',
       }}

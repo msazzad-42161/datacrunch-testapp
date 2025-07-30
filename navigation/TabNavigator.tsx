@@ -6,6 +6,7 @@ import { SearchStackNavigator } from './SearchStackNavigator';
 import { FavoritesStackNavigator } from './FavoritesStackNavigator';
 import { ProfileStackNavigator } from './ProfileStackNavigator';
 import { TabParamList } from '../types/navigation';
+import { COLORS } from '../utils/theme';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
@@ -30,7 +31,7 @@ export const TabNavigator: React.FC = () => {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: '#007AFF',
+        tabBarActiveTintColor: COLORS.accent2,
         tabBarInactiveTintColor: 'gray',
         headerShown: false,
         tabBarStyle: {
