@@ -18,9 +18,8 @@ export const FavoritesStackNavigator: React.FC = () => {
         headerTitleStyle: {
           fontWeight: 'bold',
           fontSize: 18,
-          color:COLORS.light1
         },
-        headerTintColor: '#000',
+        headerTintColor: COLORS.light1,
       }}
     >
       <Stack.Screen 

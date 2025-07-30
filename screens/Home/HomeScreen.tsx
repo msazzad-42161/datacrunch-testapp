@@ -32,7 +32,7 @@ const HomeScreen = () => {
         emptyMessage="No trending books found."
       />
       
-      {/* Trending Books Horizontal List */}
+      {/* Islamic Books Horizontal List */}
       <HorizontalBookList
         title="Islamic Books"
         books={islamicBooks?.docs}

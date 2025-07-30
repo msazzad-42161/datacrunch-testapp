@@ -4,6 +4,7 @@ import { ProfileScreen } from '../screens/Profile/ProfileScreen';
 import { SettingsScreen } from '../screens/Profile/SettingsScreen';
 import { PrivacyPolicyScreen } from '../screens/Profile/PrivacyPolicyScreen';
 import { ProfileStackParamList } from '../types/navigation';
+import { COLORS } from '../utils/theme';
 
 const Stack = createStackNavigator<ProfileStackParamList>();
 
@@ -14,13 +15,13 @@ export const ProfileStackNavigator: React.FC = () => {
         headerShown: true,
         headerShadowVisible:false,
         headerStyle: {
-          backgroundColor: '#fff',
+          backgroundColor: COLORS.accent2,
         },
         headerTitleStyle: {
           fontWeight: 'bold',
           fontSize: 18,
         },
-        headerTintColor: '#000',
+        headerTintColor: COLORS.light1,
       }}
     >
       <Stack.Screen 

@@ -19,7 +19,6 @@ export const HomeStackNavigator: React.FC = () => {
         headerTitleStyle: {
           fontWeight: 'bold',
           fontSize: 18,
-          color:COLORS.light1
         },
         headerTintColor: COLORS.light1,
       }}

@@ -12,6 +12,11 @@ const SearchResultsScreen = () => {
 <Text style={{textAlign:'center'}}>Uhmmm... <Text style={{color:COLORS.accent2,fontWeight:'bold'}}>{searchQuery}</Text>. Is it? Hmmm... {"\n"}Give me a moment</Text>
 <ActivityIndicator size={'small'}/>
   </View>)
+
+if(error) return (<View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
+  <Text>Oops! Something went wrong. Couldn't find what you were looking for.</Text>
+</View>)
+
   return (
     <View style={styles.container}>
     <FlatList

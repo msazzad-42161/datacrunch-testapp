@@ -3,6 +3,7 @@ import * as Device from 'expo-device';
 import Constants from 'expo-constants';
 import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { BookDetails } from '../types';
 
 // Configure notification behavior
 Notifications.setNotificationHandler({
@@ -197,15 +198,14 @@ class NotificationService {
   }
 
   // Send book recommendation notification
-  async sendBookRecommendation(bookTitle: string, author: string): Promise<string> {
+  async sendBookRecommendation(book:BookDetails): Promise<string> {
     try {
       return await this.sendLocalNotification({
         title: '📖 New Book Recommendation',
-        body: `Check out "${bookTitle}" by ${author}`,
+        body: `Check out "${book?.title}" by ${book?.author_name}`,
         data: {
           type: 'book_recommendation',
-          bookTitle,
-          author,
+          book
         },
       });
     } catch (error) {
