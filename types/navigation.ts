@@ -19,11 +19,12 @@ export type HomeStackParamList = {
 
 export type SearchStackParamList = {
   SearchScreen: undefined;
-  SearchResults: { query: string };
+  SearchResults: undefined;
 };
 
 export type FavoritesStackParamList = {
   FavoritesScreen: undefined;
+  Search: undefined;
 };
 
 export type ProfileStackParamList = {

@@ -3,21 +3,25 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { SearchScreen } from '../screens/Search/SearchScreen';
 import { SearchResultsScreen } from '../screens/Search/SearchResultsScreen';
 import { SearchStackParamList } from '../types/navigation';
+import { COLORS } from '../utils/theme';
+import { useBookStore } from '../store/bookStore';
 
 const Stack = createStackNavigator<SearchStackParamList>();
 
 export const SearchStackNavigator: React.FC = () => {
+  const {searchQuery} = useBookStore()
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: true,
         headerShadowVisible:false,
         headerStyle: {
-          backgroundColor: '#fff',
+          backgroundColor: COLORS.accent2,
         },
         headerTitleStyle: {
           fontWeight: 'bold',
           fontSize: 18,
+          color:COLORS.light1
         },
         headerTintColor: '#000',
       }}
@@ -26,15 +30,14 @@ export const SearchStackNavigator: React.FC = () => {
         name="SearchScreen" 
         component={SearchScreen}
         options={{
-          title: 'Search Books',
-          headerTitleAlign: 'center',
+          headerShown:false
         }}
       />
       <Stack.Screen 
         name="SearchResults" 
         component={SearchResultsScreen}
         options={{
-          title: 'Search Results',
+          title: searchQuery,
         }}
       />
     </Stack.Navigator>

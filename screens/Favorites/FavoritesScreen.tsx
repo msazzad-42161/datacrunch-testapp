@@ -4,9 +4,13 @@ import { useBookStore } from '../../store/bookStore'
 import { BookCard } from '../../components/common/BookCard'
 import Animated, { Easing, LinearTransition } from 'react-native-reanimated'
 import { COLORS, FONTSIZE } from '../../utils/theme'
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { FavoritesStackParamList, SearchStackParamList } from '../../types'
 
 const FavoritesScreen = () => {
   const {favorites} = useBookStore()
+  const navigation = useNavigation<StackNavigationProp<FavoritesStackParamList,'FavoritesScreen'>>()
  
   return (
     <View style={styles.container}>
@@ -20,7 +24,7 @@ const FavoritesScreen = () => {
         />
       ):(
         <Text style={{fontSize:FONTSIZE.subheading,alignSelf:'center',textAlign:'center'}}>No favorites book.{"\n"}<Text onPress={()=>{
-          // navigation.navigate("SearchScreen")
+          navigation.navigate("Search")
         }} style={{color:COLORS.dark2,fontWeight:"bold",textDecorationLine:'underline'}}>Search</Text> to add your favorite ones here 😉</Text>
       )}
     </View>

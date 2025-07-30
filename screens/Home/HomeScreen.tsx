@@ -13,6 +13,7 @@ const HomeScreen = () => {
   const { data: thrillerData, isLoading: thrillerLoading, error: thrillerError } = useSubjectBooks("thriller");
   const { data: comedyData, isLoading: comedyLoading, error: comedyError } = useSubjectBooks("comedy");
   const { data: kidsData, isLoading: kidsLoading, error: kidsError } = useSubjectBooks("kids");
+  const { data: islamicBooks, isLoading: islamicLoading, error: islamicError } = useSubjectBooks("islamic");
   const { data: jkRowlingBooks, isLoading: jkRowlingLoading, error: jkRowlingError } = useAuthorBooksDetailed('OL23919A'); // J.K. Rowling
   const { data: stephenKingBooks, isLoading: stephenKingLoading, error: stephenKingError } = useAuthorBooksDetailed('OL19981A'); // Stephen King
 
@@ -29,6 +30,17 @@ const HomeScreen = () => {
         showSeeAll={true}
         maxItems={10}
         emptyMessage="No trending books found."
+      />
+      
+      {/* Trending Books Horizontal List */}
+      <HorizontalBookList
+        title="Islamic Books"
+        books={islamicBooks?.docs}
+        isLoading={islamicLoading}
+        error={islamicError}
+        showSeeAll={true}
+        maxItems={10}
+        emptyMessage="No islamics books found."
       />
 
       {/* Classic Books Horizontal List */}
