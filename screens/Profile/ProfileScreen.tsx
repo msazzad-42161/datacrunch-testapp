@@ -61,11 +61,9 @@ const ProfileScreen = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-
       {/* Theme Settings */}
       {/* <View style={styles.section}>
         <Text style={styles.sectionTitle}>Appearance</Text>
-        
         <View style={styles.settingRow}>
           <Text style={styles.settingLabel}>Dark Mode</Text>
           <Switch
@@ -123,30 +121,7 @@ const ProfileScreen = () => {
             </Text>
           </TouchableOpacity>
         )}
-      {/* Test Notifications */}
-      <View style={{...styles.section,backgroundColor:"#f8f9fa",borderRadius:8}}>
-        <Text style={styles.sectionTitle}>Test Notifications</Text>
-        
-        <TouchableOpacity
-          style={styles.testButton}
-          onPress={testNotification}
-          disabled={!notificationsEnabled || isLoading || !data?.docs}
-        >
-          <Text style={[styles.testButtonText, (!notificationsEnabled || isLoading || !data?.docs) && styles.disabledText]}>
-            📖 Test Book Recommendation
-          </Text>
-        </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.testButton}
-          onPress={testDailyReminder}
-          disabled={!notificationsEnabled}
-        >
-          <Text style={[styles.testButtonText, !notificationsEnabled && styles.disabledText]}>
-            ⏰ Test Daily Reminder
-          </Text>
-        </TouchableOpacity>
-      </View>
         {/* Simple interval picker */}
         {showIntervalPicker && (
           <View style={styles.timePicker}>
@@ -188,8 +163,36 @@ const ProfileScreen = () => {
           </View>
         )}
       </View>
-      <BookReviewForm />
 
+      {/* Test Notifications */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Test Notifications</Text>
+        
+        <TouchableOpacity
+          style={styles.testButton}
+          onPress={testNotification}
+          disabled={!notificationsEnabled || isLoading || !data?.docs}
+        >
+          <Text style={[styles.testButtonText, (!notificationsEnabled || isLoading || !data?.docs) && styles.disabledText]}>
+            📖 Test Book Recommendation
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.testButton}
+          onPress={testDailyReminder}
+          disabled={!notificationsEnabled}
+        >
+          <Text style={[styles.testButtonText, !notificationsEnabled && styles.disabledText]}>
+            ⏰ Test Daily Reminder
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Book Review Section */}
+      <View style={styles.section}>
+        <BookReviewForm />
+      </View>
     </ScrollView>
   )
 }
@@ -198,24 +201,33 @@ export { ProfileScreen }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: '#f5f5f5',
-    gap:12,
-    },
+    paddingBottom: 20,
+  },
   section: {
     backgroundColor: '#fff',
-    padding:18,
-    gap:12
+    marginHorizontal: 16,
+    marginTop: 16,
+    padding: 18,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#333'
+    color: '#333',
+    marginBottom: 12,
   },
   settingRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingVertical: 8,
   },
   settingContent: {
     flex: 1,
@@ -325,10 +337,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#fff',
     fontWeight: '600',
-  },
-  statusText: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 5,
   },
 })

@@ -167,7 +167,7 @@ export const BookReviewForm: React.FC = () => {
     <View style={styles.container}>
       <Text style={styles.sectionTitle}>📚 Write a Book Review</Text>
       
-      <ScrollView style={styles.form} showsVerticalScrollIndicator={false}>
+      <View style={styles.form}>
           {/* Book Title */}
           <View style={styles.fieldContainer}>
             <Text style={styles.label}>Book Title *</Text>
@@ -401,7 +401,7 @@ export const BookReviewForm: React.FC = () => {
               </Text>
             </View>
           )}
-      </ScrollView>
+      </View>
     </View>
   );
 };
@@ -420,7 +420,8 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   form: {
-    maxHeight: 400, // Limit height to prevent overflow
+    flexGrow:1
+    // maxHeight: 400, // Limit height to prevent overflow
   },
   fieldContainer: {
     marginBottom: 20,
