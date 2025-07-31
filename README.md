@@ -51,16 +51,6 @@ npm install
 yarn install
 ```
 
-### 3. Install Expo CLI (if not already installed)
-```bash
-npm install -g @expo/cli
-```
-
-### 4. Verify Installation
-```bash
-expo --version
-```
-
 ## 🏃‍♂️ Running the Application
 
 ### Development Mode
