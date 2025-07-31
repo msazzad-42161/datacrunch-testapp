@@ -13,7 +13,10 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "runtimeVersion": {
+        "policy": "appVersion"
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -25,7 +28,8 @@
         "android.permission.RECORD_AUDIO",
         "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.newto944.datacrunchtestapp"
+      "package": "com.newto944.datacrunchtestapp",
+      "runtimeVersion": "1.0.0"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -42,6 +46,14 @@
     "notification": {
       "icon": "./assets/favicon.png",
       "color": "#000000"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "560f2355-88b0-4429-9d8b-c1e8c1e7c826"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/560f2355-88b0-4429-9d8b-c1e8c1e7c826"
     }
   }
 }
