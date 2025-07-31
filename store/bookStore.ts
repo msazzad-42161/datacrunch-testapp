@@ -2,6 +2,8 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Book } from '../types/book';
+import { notificationService } from '../services/notificationService';
+import { useUserStore } from './userStore';
 
 interface BookStore {
   // State
@@ -39,6 +41,9 @@ export const useBookStore = create<BookStore>()(
         })),
 
       toggleFavorite: (book) => {
+        const { notificationsEnabled } = useUserStore.getState();
+        console.log("Notifications Enabled? ",notificationsEnabled)
+
         const { favorites } = get();
         const isAlreadyFavorite = favorites.some((fav) => fav.key === book.key);
         
@@ -46,6 +51,16 @@ export const useBookStore = create<BookStore>()(
           get().removeFromFavorites(book.key);
         } else {
           get().addToFavorites(book);
+          if(notificationsEnabled){
+            notificationService.sendLocalNotification({
+              title:"New book added to favorites",
+              body:`Book "${book.title}" has been added to your favorite library!`,
+              data: {
+                type: 'book_added_to_favorite',
+                book
+              },
+            })
+          }
         }
       },
 

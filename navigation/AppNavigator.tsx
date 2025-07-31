@@ -5,46 +5,61 @@ import { TabNavigator } from './TabNavigator';
 import { BookDetailsScreen } from '../screens/BookDetails/BookDetailsScreen';
 import { RootStackParamList } from '../types/navigation';
 import { notificationService } from '../services/notificationService';
+import { useUserStore } from '../store/userStore';
+import { SchedulableTriggerInputTypes } from 'expo-notifications';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 export const AppNavigator: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>()
+  const {initializeDailyReminder} = useUserStore()
   const handleNotificationTap = (data: any, navigation: any) => {
-  console.log('Notification data:', data);
-
-  if (data?.type) {
-    switch (data.type) {
-      case 'book_recommendation':
-        // Navigate to book details screen
-        if (data.book) {
-          navigation.navigate('BookDetails', { key: data.book.key, first_publish_year:data.book.first_publish_year });
-        }
-        break;
-        
-      // case 'daily_reminder':
-      //   // Navigate to reading screen or library
-      //   navigation.navigate('Library');
-      //   break;
-        
-      // case 'goal_reminder':
-      //   // Navigate to goals/progress screen
-      //   navigation.navigate('ReadingGoals');
-      //   break;
-        
-      default:
-        // Default action - maybe go to home screen
-        navigation.navigate('Home');
-        break;
+    console.log('Notification data:', data);
+  
+    if (data?.type) {
+      switch (data.type) {
+        case 'book_recommendation':
+          // Navigate to book details screen
+          if (data.book) {
+            navigation.navigate('BookDetails', { 
+              key: data.book.key, 
+              first_publish_year: data.book.first_publish_year 
+            });
+          }
+          break;
+          
+        case 'daily_reminder': // Changed from SchedulableTriggerInputTypes.TIME_INTERVAL
+          // Navigate to Home tab
+          navigation.navigate('Main', {
+            screen: 'Search'
+          });
+          break;
+          
+        case 'book_added_to_favorite':
+          // Navigate to Favorites tab
+          navigation.navigate('Main', {
+            screen: 'Favorites'
+          });
+          break;
+          
+        default:
+          // Default action - go to home tab
+          navigation.navigate('Main', {
+            screen: 'Home'
+          });
+          break;
+      }
+    } else {
+      // Handle notifications without specific type data
+      navigation.navigate('Main', {
+        screen: 'Home'
+      });
     }
-  } else {
-    // Handle notifications without specific type data
-    navigation.navigate('Home');
-  }
-};
+  };
   useEffect(() => {
     // Initialize notification service
     notificationService.initialize();
+    initializeDailyReminder();
 
     // Handle notification taps
     const subscription = notificationService.addNotificationResponseReceivedListener(

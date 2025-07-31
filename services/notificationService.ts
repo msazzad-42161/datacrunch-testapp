@@ -8,7 +8,7 @@ import { BookDetails } from '../types';
 // Configure notification behavior
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
-    shouldShowAlert: true,
+    // shouldShowAlert: true,
     shouldPlaySound: true,
     shouldSetBadge: false,
     shouldShowBanner: true,
@@ -137,13 +137,18 @@ class NotificationService {
           title: notification.title,
           body: notification.body,
           sound: 'default',
+          // Add data to help identify notification type
+          data: {
+            type: 'daily_reminder',
+            id: notification.id
+          }
         },
         trigger: notification.trigger,
       });
-
+  
       // Store the notification ID for later management
       await this.storeNotificationId(notificationId);
-
+  
       return notificationId;
     } catch (error) {
       console.error('Error scheduling notification:', error);
@@ -152,26 +157,44 @@ class NotificationService {
   }
 
   // Schedule daily reading reminder
-  async scheduleDailyReminder(hour: number = 19, minute: number = 0): Promise<string> {
+  async scheduleDailyReminder(seconds: number = 30): Promise<string> {
     try {
       const notificationId = await this.scheduleLocalNotification({
         id: 'daily_reminder',
         title: '📚 Reading Time!',
         body: "Don't forget to spend some time with your favorite books today.",
         trigger: {
-          type: Notifications.SchedulableTriggerInputTypes.CALENDAR,
-          hour,
-          minute,
+          type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+          seconds,
           repeats: true,
         },
       });
-
+  
       return notificationId;
     } catch (error) {
       console.error('Error scheduling daily reminder:', error);
       throw error;
     }
   }
+
+  // Cancel daily reminder notifications specifically
+async cancelDailyReminders(): Promise<void> {
+  try {
+    const scheduledNotifications = await this.getScheduledNotifications();
+    
+    // Find and cancel all daily reminder notifications
+    const dailyReminders = scheduledNotifications.filter(notification => 
+      notification.content.title?.includes('Reading Time') ||
+      notification.identifier.includes('daily_reminder')
+    );
+    
+    for (const reminder of dailyReminders) {
+      await this.cancelNotification(reminder.identifier);
+    }
+  } catch (error) {
+    console.error('Error canceling daily reminders:', error);
+  }
+}
 
   // Schedule reading goal reminder
   async scheduleGoalReminder(): Promise<string> {
