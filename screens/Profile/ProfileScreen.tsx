@@ -4,6 +4,7 @@ import { notificationService } from '../../services/notificationService'
 import { useTrendingBooks } from '../../hooks/useBooks'
 import { useUserStore } from '../../store/userStore'
 import { COLORS } from '../../utils/theme'
+import { BookReviewForm } from '../../components/forms/BookReview'
 
 const ProfileScreen = () => {
   const { data, isLoading, error } = useTrendingBooks()
@@ -59,7 +60,7 @@ const ProfileScreen = () => {
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
 
       {/* Theme Settings */}
       {/* <View style={styles.section}>
@@ -187,6 +188,7 @@ const ProfileScreen = () => {
           </View>
         )}
       </View>
+      <BookReviewForm />
 
     </ScrollView>
   )
@@ -198,7 +200,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
-    gap:12
+    gap:12,
     },
   section: {
     backgroundColor: '#fff',
