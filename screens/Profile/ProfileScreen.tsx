@@ -203,7 +203,6 @@ const styles = StyleSheet.create({
   section: {
     backgroundColor: '#fff',
     padding:18,
-    borderRadius:8,
     gap:12
   },
   sectionTitle: {
